@@ -1,1 +1,0 @@
-{"version":3,"sources":["sass/_load-button.scss"],"names":[],"mappings":"AAAA,qBACE,aAGF,WACE","file":"src.10ea0578.css","sourceRoot":"../src","sourcesContent":[".load-more.is-hidden {\n  display: none;\n}\n\n.load-more {\n  display: block;\n}\n"]}

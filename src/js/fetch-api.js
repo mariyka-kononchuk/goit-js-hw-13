@@ -4,8 +4,17 @@ const { form, list, card, more } = refs;
 import Notiflix from "notiflix";
 import SimpleLightbox from "simplelightbox";
 
-var lightbox = $('.gallery a').simpleLightbox(options);
 
+//var lightbox = $('.image').simpleLightbox(options);
+// var gallery = $('.image').simpleLightbox();
+
+// gallery.open();
+// let gallery = new SimpleLightbox('.image');
+// gallery.on('show.simplelightbox', function () {
+// 	// do something…
+// });
+
+    
 
 let total = 0;
 form.addEventListener("submit", (evt) => {

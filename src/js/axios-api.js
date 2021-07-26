@@ -9,9 +9,16 @@ import SimpleLightbox from "simplelightbox";
 const baseUrl = "https://pixabay.com/api/";
 axios.defaults.baseURL = baseUrl;
 const apiKey = "22651538-53630abe578d2561aeb41817a";
+//плавная прокрутка
+// const { height: cardHeight } = document
+//   .querySelector('.gallery')
+//     .firstElementChild.getBoundingClientRect();
+// console.log(document.querySelector('.gallery').firstElementChild.getBoundingClientRect());
 
-//axios.defaults.headers.common.Authorization = apiKey;
-
+// window.scrollBy({
+//     top: cardHeight * 2,
+//   behavior: 'smooth',
+// });
 
 const myFetch = getFetch();
 const { setQuery, getImages, loadMore, resetPage, resetTotal, message } = myFetch;
@@ -66,6 +73,7 @@ function getFetch() {
         
         const response = await axios.get(url);
         const data = response.data;
+        console.log(data);
         const photo = data.hits;
         const totalHits = data.totalHits;
         generateGallery(photo, totalHits);
@@ -87,6 +95,7 @@ function getFetch() {
     }, 300);
     }
         list.insertAdjacentHTML("beforeend", gallery);
+        
         return  total;
 }
     function message() {
@@ -110,8 +119,13 @@ function getFetch() {
 
 
  
-    
-   
+ //библиотека SimpleLightbox
+//    let gallery = new SimpleLightbox('.image', { sourceAttr });
+// var lightbox = ('.gallery a').simpleLightbox({ /* options */ });
+// gallery.on('show.simplelightbox', function () {
+//     console.log("библиотека");
+// });
+// gallery.open();
    
 
 

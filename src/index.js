@@ -3,3 +3,4 @@ import './sass/main.scss';
 //import './js/fetch-api';
 //2-й вариант решения
 import './js/axios-api';
+import './js/simple-lightbox';

@@ -27,13 +27,18 @@ form.addEventListener("submit", (evt) => {
 //     place.insertAdjacentHTML("beforeend", items);
 //     card.innerHTML = cardTpl(items);
 // }
-
+let total = 0;
 function generateGallery(photo, hit) {
     const gallery = cardTpl(photo);
+    
+    total+= photo.length;
+    
     console.log(hit);
+    console.log(photo.length);
+    
     if (photo.length === 0) {
         return Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.');
-    } else if (photo.length === hit) {
+    } else if (hit === total) {
         
         list.insertAdjacentHTML("beforeend", gallery);
         more.classList.add("is-hidden");
@@ -41,6 +46,8 @@ function generateGallery(photo, hit) {
     }
     
     list.insertAdjacentHTML("beforeend", gallery);
+    console.log(total);
+    return total;
 }
 
 const fetchObject = {
@@ -54,7 +61,7 @@ const fetchObject = {
     //переменная, указывающая порядковый номер набора картинок, который мы сейчас получаем
     page: 1,
     //переменная, указывающая на количество найденных элементов по запросу на одной странцие
-    per_page: 3, //позже сделать 40
+    per_page: 4, //позже сделать 40
     //метод изменения страницы
     query: "",
     setQuery(value) {

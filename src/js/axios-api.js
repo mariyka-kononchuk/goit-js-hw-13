@@ -23,12 +23,10 @@ const apiKey = "22651538-53630abe578d2561aeb41817a";
 const myFetch = getFetch();
 const { setQuery, getImages, loadMore, resetPage, resetTotal, message } = myFetch;
 
-let total = 0;
+//let total = 0;
 
 form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-   
-
     let query = evt.target.elements.searchQuery.value.trim()
     if (query === "") {
          return;
@@ -52,6 +50,7 @@ function getFetch() {
     let per_page = 40;
     let query = "";
     let hit = 0;
+    let total = 0;
 
     function resetTotal() {
         return total=0;

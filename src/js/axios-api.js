@@ -86,12 +86,12 @@ function getFetch() {
     
         if (photo.length === 0) {
             more.classList.add("is-hidden");
-            return Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.');
+            return Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         } else if (totalHits === total) {
             list.insertAdjacentHTML("beforeend", gallery);
             more.classList.add("is-hidden");
             return setTimeout(() => {
-                Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+                Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
     }, 300);
     }
         list.insertAdjacentHTML("beforeend", gallery);

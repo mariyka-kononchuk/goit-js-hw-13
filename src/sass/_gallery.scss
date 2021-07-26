@@ -1,16 +1,4 @@
-.load-more.is-hidden {
-  display: none;
-}
-
-.load-more {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.gallery__list {
+.gallery-list {
   display: grid;
   width: 1200px;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -59,19 +47,9 @@
 }
 
 .info-text {
+  margin-top: 3px;
   display: flex;
   justify-content: center;
   font-size: 12px;
   font-weight: 400;
-}
-
-.search-form {
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: khaki;
-}
-.search-form input {
-  margin-right: 15px;
 }

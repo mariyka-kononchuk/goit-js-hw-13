@@ -31,10 +31,10 @@ form.addEventListener("submit", (evt) => {
     resetTotal();
     setQuery(query);
     getImages();
-    more.classList.remove("is-hidden");
     setTimeout(() => {
         message();
-  }, 300);
+    }, 300);
+    more.classList.remove("is-hidden");
     form.reset();
 });
 
@@ -42,22 +42,20 @@ loadMore(more);
 
 function getFetch() {
     let page = 1;    
-    let per_page = 8;
+    let per_page = 40;
     let query = "";
     let hit = 0;
+
     function resetTotal() {
         return total=0;
     }
-
     function setPage() {
-        console.log("страница",page);
         return page += 1;
     }
     function resetPage() {
         return page = 1;
     }
     function setQuery(value) {
-       // console.log(query);
         return query = value;
     }
     //функция запроса
@@ -75,27 +73,21 @@ function getFetch() {
     }
 
     function generateGallery(photo, totalHits) {
-    const gallery = cardTpl(photo);
+        const gallery = cardTpl(photo);  
+        total+= photo.length;
     
-    total+= photo.length;
-    console.log("total2",total);
-    console.log(totalHits);
-    console.log(photo.length);
-    
-    if (photo.length === 0) {
-        more.classList.add("is-hidden");
-        return Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.');
-    } else if (totalHits === total) {
-        list.insertAdjacentHTML("beforeend", gallery);
-        more.classList.add("is-hidden");
-        return setTimeout(() => {
-            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
-  }, 300);
+        if (photo.length === 0) {
+            more.classList.add("is-hidden");
+            return Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.');
+        } else if (totalHits === total) {
+            list.insertAdjacentHTML("beforeend", gallery);
+            more.classList.add("is-hidden");
+            return setTimeout(() => {
+                Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+    }, 300);
     }
-   
-    list.insertAdjacentHTML("beforeend", gallery);
-    console.log(total);
-    return  total;
+        list.insertAdjacentHTML("beforeend", gallery);
+        return  total;
 }
     function message() {
         if (hit === 0) {
@@ -106,9 +98,7 @@ function getFetch() {
 
     function loadMore(button) {
         button.addEventListener("click", () => {
-            console.log("Загрузить больше");
             setPage();
-            console.log(page);
             getImages();
         });
     }

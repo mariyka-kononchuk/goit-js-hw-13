@@ -1,7 +1,8 @@
 {{#each this}}
-<li>
     <div class="photo-card">
-        <img src="{{webformatURL}}" alt="{{tags}}" loading="lazy" class="image" />
+        <div class="image-thumb">
+            <img src="{{webformatURL}}" alt="{{tags}}" loading="lazy" class="image" />
+        </div>
         <div class="info">
             <p class="info-item">
                 <b class="info-subtitle">Likes <span class ="info-text">{{likes}}</span> </b>
@@ -17,5 +18,4 @@
             </p>
         </div>
     </div>
-</li>
 {{/each}}

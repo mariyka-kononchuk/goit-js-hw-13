@@ -1,10 +1,11 @@
 import axios from "axios";
+import Notiflix from "notiflix";
+import SimpleLightbox from "simplelightbox";
 import "regenerator-runtime";
 import cardTpl from '../templates/gallery.hbs';
 import refs from "./refs.js";
-const { form, list, card, more } = refs;
-import Notiflix from "notiflix";
-import SimpleLightbox from "simplelightbox";
+const { form, list, galleryList, more, imageModal,divModal, buttonModal,overlayModal} = refs;
+
 
 const baseUrl = "https://pixabay.com/api/";
 axios.defaults.baseURL = baseUrl;
@@ -46,14 +47,14 @@ form.addEventListener("submit", (evt) => {
 loadMore(more);
 
 function getFetch() {
-    let page = 1;    
+    let page = 1;
     let per_page = 40;
     let query = "";
     let hit = 0;
     let total = 0;
 
     function resetTotal() {
-        return total=0;
+        return total = 0;
     }
     function setPage() {
         return page += 1;
@@ -75,13 +76,15 @@ function getFetch() {
         console.log(data);
         const photo = data.hits;
         const totalHits = data.totalHits;
+
+        //console.log(data.hits[i]);
         generateGallery(photo, totalHits);
         hit = totalHits;
     }
 
     function generateGallery(photo, totalHits) {
-        const gallery = cardTpl(photo);  
-        total+= photo.length;
+        const gallery = cardTpl(photo);
+        total += photo.length;
     
         if (photo.length === 0) {
             more.classList.add("is-hidden");
@@ -91,30 +94,74 @@ function getFetch() {
             more.classList.add("is-hidden");
             return setTimeout(() => {
                 Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
-    }, 300);
-    }
+            }, 300);
+        }
         list.insertAdjacentHTML("beforeend", gallery);
+
+        galleryList.addEventListener('click', onOpenModal);
+        return total;
+    }
         
-        return  total;
-}
-    function message() {
-        if (hit === 0) {
+
+    
+    function onOpenModal(evt) {
+        if (evt.target.nodeName !== "IMG") {
             return;
         }
-        return Notiflix.Notify.info(`Hooray! We found ${hit} images.`);
+        evt.preventDefault();
+        divModal.classList.add('is-open');
+        imageModal.src = evt.target.dataset.source;
+        imageModal.alt = evt.target.alt;
+
+        // let items = document.querySelectorAll('.image');
+        // let currentIndex = items.index;
+        // console.log(`${currentIndex}`);
+        // const source = items.src;
+
+        // console.log(items);
+        // console.log(source);
+        // currentIndex = evt.target.dataset.num;
+        // console.log(currentIndex);
+
+       // previousElementSibling, nextElementSibling – соседи-элементы.
+
+        buttonModal.addEventListener('click', onCloseModal);
+        overlayModal.addEventListener('click', onCloseModal);
+
+        document.addEventListener('keydown', event => {
+            if (event.code === "Escape") {
+                onCloseModal();
+            };
+        })
+    }
+
+    function onCloseModal() {
+        divModal.classList.remove('is-open');
+        divModal.classList.add('is-close');
+        imageModal.src = "";
+        buttonModal.removeEventListener('click', onCloseModal);
+        overlayModal.removeEventListener('click', onCloseModal);
+    }
+
+    function message() {
+            if (hit === 0) {
+                return;
+            }
+            return Notiflix.Notify.info(`Hooray! We found ${hit} images.`);
     }
 
     function loadMore(button) {
-        button.addEventListener("click", () => {
-            setPage();
-            getImages();
-        });
+            button.addEventListener("click", () => {
+                setPage();
+                getImages();
+            });
     }
-        return { setQuery, loadMore, resetPage, getImages, message, resetTotal};
+    
+        return { setQuery, loadMore, resetPage, getImages, message, resetTotal, onCloseModal };
     }
 
 
-
+    
 
 
  

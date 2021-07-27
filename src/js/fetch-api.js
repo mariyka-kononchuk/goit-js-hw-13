@@ -1,6 +1,6 @@
 import cardTpl from '../templates/gallery.hbs';
 import refs from "./refs.js";
-const { form, list, card, more } = refs;
+const { form, list, gallery, more } = refs;
 import Notiflix from "notiflix";
 import SimpleLightbox from "simplelightbox";
 

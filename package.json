@@ -32,6 +32,7 @@
     "lodash.debounce": "^4.0.8",
     "notiflix": "^3.0.1",
     "regenerator-runtime": "^0.13.9",
+    "simple-lightbox": "^2.1.0",
     "simplelightbox": "^2.8.0"
   }
 }

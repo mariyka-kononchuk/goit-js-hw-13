@@ -48,7 +48,7 @@ loadMore(more);
 
 function getFetch() {
     let page = 1;
-    let per_page = 40;
+    let per_page = 5;
     let query = "";
     let hit = 0;
     let total = 0;
@@ -83,9 +83,12 @@ function getFetch() {
     }
 
     function generateGallery(photo, totalHits) {
+       
+        //photo.forEach(element => console.log(element));
+        //photo.indexOf(1);
         const gallery = cardTpl(photo);
         total += photo.length;
-    
+        console.log("массив", photo);
         if (photo.length === 0) {
             more.classList.add("is-hidden");
             return Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
@@ -99,12 +102,23 @@ function getFetch() {
         list.insertAdjacentHTML("beforeend", gallery);
 
         galleryList.addEventListener('click', onOpenModal);
+        
+        const images = document.querySelectorAll('.image');
+        console.log(images);
+        for (const image of images) {
+        image.dataset.index = 1;
+        }
         return total;
     }
         
 
     
     function onOpenModal(evt) {
+//         var lightbox = new SimpleLightbox({
+//     elements: document.querySelectorAll('.gallery-list')
+// });
+//         lightbox.show();
+        
         if (evt.target.nodeName !== "IMG") {
             return;
         }
@@ -112,22 +126,39 @@ function getFetch() {
         divModal.classList.add('is-open');
         imageModal.src = evt.target.dataset.source;
         imageModal.alt = evt.target.alt;
-
-        // let items = document.querySelectorAll('.image');
-        // let currentIndex = items.index;
-        // console.log(`${currentIndex}`);
-        // const source = items.src;
-
-        // console.log(items);
-        // console.log(source);
-        // currentIndex = evt.target.dataset.num;
-        // console.log(currentIndex);
-
-       // previousElementSibling, nextElementSibling – соседи-элементы.
-
+        
         buttonModal.addEventListener('click', onCloseModal);
         overlayModal.addEventListener('click', onCloseModal);
-
+        window.addEventListener('keydown', onArrow);
+            
+        function onArrow(evt) {
+            const photosEl = document.querySelectorAll(".image");
+            for (let i = 0; i < photosEl.length; i += 1) {
+                if (photosEl[i].dataset.source === imageModal.src) {
+                    if (evt.code === "ArrowLeft") {
+                        if (i === 0) {
+                             return;
+                        };
+                        console.log("ok");
+                        console.log("ura", i);
+                        imageModal.src = photosEl[i - 1].dataset.source;
+                        imageModal.alt = photosEl[i - 1].alt;
+                        return;
+                    }
+                    if (evt.code === "ArrowRight") {
+                        console.log("ok");
+                        if (i === photosEl.length - 1) {
+                            return;
+                        };
+                        console.log("ura",i);
+                        imageModal.src = photosEl[i + 1].dataset.source;
+                        imageModal.alt = photosEl[i + 1].alt;
+                        return;
+                    };
+                }
+            };  
+        };
+        
         document.addEventListener('keydown', event => {
             if (event.code === "Escape") {
                 onCloseModal();
@@ -141,6 +172,8 @@ function getFetch() {
         imageModal.src = "";
         buttonModal.removeEventListener('click', onCloseModal);
         overlayModal.removeEventListener('click', onCloseModal);
+        window.removeEventListener('keydown', onArrowRight);
+        window.removeEventListener('keydown', onArrowLeft);
     }
 
     function message() {

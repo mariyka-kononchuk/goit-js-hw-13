@@ -45,8 +45,8 @@
 
 .lightbox__button {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 20px;
+  right: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,6 +62,53 @@
   transition: background-color var(--animation-duration) var(--timing-function);
   outline: none;
   background-image: url('../images/icon-close.svg');
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+}
+
+.lightbox__button--arrowRight {
+  position: absolute;
+  top: 420px;
+  right: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color var(--animation-duration) var(--timing-function);
+  outline: none;
+  background-image: url('../images/icon-arrow-right.svg');
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+}
+.lightbox__button--arrowLeft {
+  position: absolute;
+  top: 420px;
+  left: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color var(--animation-duration) var(--timing-function);
+  outline: none;
+  background-image: url('../images/icon-arrow-left.svg');
   background-position: center;
   background-size: 60%;
   background-repeat: no-repeat;

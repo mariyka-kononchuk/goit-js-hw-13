@@ -98,7 +98,6 @@ function getFetch() {
         list.insertAdjacentHTML("beforeend", gallery);
         //КЛАССИЧЕСКАЯ МОДАЛКА: переход между картинками реализован с помощью индекса массива изображений
         //galleryList.addEventListener('click', onOpenModal);
-
         //МОДАЛКА ИЗ БИБЛИОТЕКИ Simplelightbox
         openSimpleLightboxModal();
         //плавная прокрутка

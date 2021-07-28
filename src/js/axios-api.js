@@ -125,8 +125,8 @@ function getFetch() {
         });
     }
     
-        return { setQuery, loadMore, resetPage, getImages, message, resetTotal};
-    }
+    return { setQuery, loadMore, resetPage, getImages, message, resetTotal};
+}
 
 
     

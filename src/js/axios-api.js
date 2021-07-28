@@ -18,6 +18,7 @@ const { setQuery, getImages, loadMore, resetPage, resetTotal, message } = myFetc
 form.addEventListener("submit", (evt) => {
     evt.preventDefault();
     let query = evt.target.elements.searchQuery.value.trim()
+    //проверка на пустой инпут
     if (query === "") {
          return;
     };
@@ -76,7 +77,6 @@ function getFetch() {
         generateGallery(photo, totalHits);
         hit = totalHits;
     }
-
     function generateGallery(photo, totalHits) {
         const gallery = cardTpl(photo);
         //общее к-во выведенных картинок
@@ -104,28 +104,24 @@ function getFetch() {
         pageScroll()
         return total;
     }
-        
     function message() {
             if (hit === 0) {
                 return;
             }
             return Notiflix.Notify.info(`Hooray! We found ${hit} images.`);
     }
-
     function loadMore(button) {
             button.addEventListener("click", () => {
                 setPage();
                 getImages();
             });
     }
-
     function openSimpleLightboxModal() {
         const lightbox = new SimpleLightbox('.gallery a', {elements: '.gallery a'} );
         lightbox.on('show.simplelightbox', function () {
             galleryList.addEventListener('click', evt => evt.preventDefault());
         });
     }
-
     function pageScroll() {
             const { height: cardHeight } = document
                 .querySelector('.gallery')
@@ -135,7 +131,6 @@ function getFetch() {
                     behavior: 'smooth',
                 });
     }
-    
     return { setQuery, loadMore, resetPage, getImages, message, resetTotal};
 }
 

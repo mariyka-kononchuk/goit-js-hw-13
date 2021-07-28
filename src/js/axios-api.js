@@ -101,6 +101,8 @@ function getFetch() {
 
         //МОДАЛКА ИЗ БИБЛИОТЕКИ Simplelightbox
         openSimpleLightboxModal();
+        //плавная прокрутка
+        pageScroll()
         return total;
     }
         
@@ -124,6 +126,16 @@ function getFetch() {
             galleryList.addEventListener('click', evt => evt.preventDefault());
         });
     }
+
+    function pageScroll() {
+            const { height: cardHeight } = document
+                .querySelector('.gallery')
+                .firstElementChild.getBoundingClientRect();
+                window.scrollBy({
+                    top: cardHeight * 2,
+                    behavior: 'smooth',
+                });
+    }
     
     return { setQuery, loadMore, resetPage, getImages, message, resetTotal};
 }
@@ -131,16 +143,7 @@ function getFetch() {
 
     
 
-//плавная прокрутка
-// const { height: cardHeight } = document
-//   .querySelector('.gallery')
-//     .firstElementChild.getBoundingClientRect();
-// console.log(document.querySelector('.gallery').firstElementChild.getBoundingClientRect());
 
-// window.scrollBy({
-//     top: cardHeight * 2,
-//   behavior: 'smooth',
-// });
  
    
 
